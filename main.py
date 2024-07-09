@@ -26,7 +26,8 @@ for filepath in filepaths:
 
     # Table Header by using pandas
     header = df.columns
-
+    # List Comprehension to remove underscores in header
+    header = [item.replace("_", " ").title() for item in header]
     pdf.set_font(family="Times", style="B", size=10)
     pdf.set_text_color(40, 40, 40)
     pdf.cell(w=30, h=8, txt=header[0], border=1)
