@@ -38,13 +38,23 @@ for filepath in filepaths:
 
     # Add rows to the table
     for index, row in df.iterrows():
-        pdf.set_font(family="Times", style="B", size=10)
+        pdf.set_font(family="Times", size=10)
         pdf.set_text_color(40, 40, 40)
         pdf.cell(w=30, h=8, txt=str(row["product_id"]), border=1)
         pdf.cell(w=70, h=8, txt=str(row["product_name"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["amount_purchased"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1, ln=1)
+
+    # Calculating Total sum of invoices
+    total_sum = df["total_price"].sum()
+    pdf.set_font(family="Times", size=10)
+    pdf.set_text_color(40, 40, 40)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=70, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt=str(total_sum), border=1, ln=1)
 
     # Create PDF that creates dynamic name automatically
     pdf.output(f"PDFs/{filename}.pdf")
